@@ -1,0 +1,46 @@
+@import 'colors';
+@import 'fonts';
+@import 'size-pages';
+@import 'dropdown';
+
+body {
+	font-family: 'JetBrainsMono';
+	font-size: 14px;
+	color: var(--text-color);
+	font-weight: 300;
+
+	@include size-page('phone-hd-max') {
+		font-size: 10px;
+		//TODO: Fix buttons for mobile devices
+		& .MuiButton-root {
+			font-size: 10px;
+			padding: 2px 3px;
+		}
+	}
+}
+
+main {
+	padding: 15px;
+}
+
+svg {
+	width: 16px;
+	height: 16px;
+}
+
+h1,
+h2 {
+	margin: 0;
+	padding: 0;
+}
+
+hr {
+	width: 100%;
+	color: var(--gray-100);
+	border-style: solid;
+	margin-bottom: 20px;
+}
+
+#root {
+	height: 100vh;
+}

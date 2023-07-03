@@ -1,0 +1,108 @@
+@import '@style/size-pages';
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 60px;
+	padding: 0 15px;
+	border-bottom: 1px solid var(--gray-300);
+	background-color: var(--gray-50);
+	z-index: 1;
+
+	&__heading {
+		font-family: cursive;
+		font-size: 20px;
+	}
+
+	@include size-page('phone-hd-max') {
+		min-height: 30px;
+		padding: 0 5px;
+	}
+
+	&__profile-info {
+		display: flex;
+		align-items: center;
+		justify-content: end;
+
+		& div {
+			margin-right: 2vw;
+		}
+
+		&_avatar {
+			max-width: calc(3vw - 3%);
+			border-radius: 50%;
+			border: 1px solid var(--primary-900);
+			margin-right: 10px;
+			cursor: pointer;
+
+			@include size-page('phone-hd-max') {
+				//TODO: fix
+				max-width: 25px;
+				margin-right: 5px;
+			}
+		}
+	}
+
+	&__logout {
+		color: var(--primary-500) !important;
+		border-color: var(--primary-500) !important;
+	}
+
+	&__right {
+		display: flex;
+		align-items: center;
+
+		@include size-page('phone-hd-max') {
+			max-width: 60%;
+
+			& .icon {
+				max-width: 25px;
+			}
+		}
+	}
+
+	&__dropdown {
+		position: relative;
+		width: 80px;
+		border-radius: 2px;
+		margin-right: 15px;
+		cursor: pointer;
+
+		&_menu {
+			background-color: var(--primary-800) !important;
+
+			&_item {
+				display: flex;
+				align-items: center;
+				padding: 4px;
+
+				&:hover {
+					background-color: var(--primary-300);
+					cursor: pointer;
+
+					&:first-of-type {
+						border-top-left-radius: 5px;
+						border-top-right-radius: 5px;
+					}
+
+					&:last-of-type {
+						border-bottom-left-radius: 5px;
+						border-bottom-right-radius: 5px;
+					}
+				}
+			}
+
+			& [aria-selected='true'] {
+				display: none;
+			}
+		}
+
+		& svg {
+			width: 100%;
+			height: 100%;
+			border-radius: 2px;
+			margin-right: 5px;
+		}
+	}
+}

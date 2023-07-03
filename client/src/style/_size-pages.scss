@@ -1,0 +1,83 @@
+@mixin size-page($size) {
+	@if $size == phone-min {
+		@media (max-width: 320px) {
+			@content;
+		}
+	} @else if $size == phone-midl {
+		@media (min-width: 321px) and (max-width: 480px) {
+			@content;
+		}
+	} @else if $size == phone-hd {
+		@media (min-width: 481px) and (max-width: 640px) {
+			@content;
+		}
+	} @else if $size == phone-hd-max {
+		@media (max-width: 640px) {
+			@content;
+		}
+	} @else if $size == tablet {
+		@media (min-width: 641px) and (max-width: 768px) {
+			@content;
+		}
+	} @else if $size == tablet-big {
+		@media (min-width: 769px) and (max-width: 1024px) {
+			@content;
+		}
+	} @else if $size == tablet-big-min {
+		@media (min-width: 769px) {
+			@content;
+		}
+	} @else if $size == tablet-big-max {
+		@media (max-width: 800px) {
+			@content;
+		}
+	} @else if $size == tablet-big-max-plus {
+		@media (max-width: 1024px) {
+			@content;
+		}
+	} @else if $size == desctop-min {
+		@media (min-width: 1025px) and (max-width: 1280px) {
+			@content;
+		}
+	} @else if $size == desctop-mid {
+		@media (min-width: 1281px) and (max-width: 1440px) {
+			@content;
+		}
+	} @else if $size == desctop-max {
+		@media (min-width: 1441px) and (max-width: 1600px) {
+			@content;
+		}
+	} @else if $size == desktop-fullHD-min {
+		@media (min-width: 1601px) {
+			@content;
+		}
+	} @else if $size == desktop-fullHD {
+		@media (min-width: 1601px) and (max-width: 1920px) {
+			@content;
+		}
+	} @else if $size == desktop-twoK {
+		@media (min-width: 1921px) and (max-width: 2048px) {
+			@content;
+		}
+	} @else if $size == desktop-retina {
+		@media (min-width: 2049px) and (max-width: 2880px) {
+			@content;
+		}
+	} @else if $size == desctop-beFourK {
+		@media (min-width: 2881px) and (max-width: 3200px) {
+			@content;
+		}
+	} @else if $size == desctop-fourK {
+		@media (min-width: 3201px) and (max-width: 3840px) {
+			@content;
+		}
+	} @else if $size == desctop-fiveK {
+		@media (min-width: 3841px) and (max-width: 5120px) {
+			@content;
+		}
+	} @else if $size == desctop-eightK {
+		@media (min-width: 5121px) and (max-width: 7680px) {
+			@content;
+		}
+	}
+}

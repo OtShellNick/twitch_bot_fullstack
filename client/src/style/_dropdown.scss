@@ -1,0 +1,14 @@
+.appDropdown {
+	border-radius: 5px;
+	border: 1px solid var(--gray-200);
+	background-color: var(--primary-200) !important;
+
+	&__triangle {
+		background-color: var(--primary-200) !important;
+	}
+
+	&__content {
+		padding: 0;
+		overflow: hidden;
+	}
+}
