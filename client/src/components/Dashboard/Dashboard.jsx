@@ -39,6 +39,10 @@ const Dashboard = () => {
 					onChange={switchBot}
 				/>
 			</div>
+			<div style={{ position: 'fixed', bottom: 0, display: 'flex', alignItems: 'center', gap: 15 }}>
+				<span>{`При желании Вы можете поддержать развитие проекта: `}</span>
+				<iframe src="https://yoomoney.ru/quickpay/fundraise/button?billNumber=n2yRLQG4RIw.230704&" width="330" height="50" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+			</div>
 		</main>
 	);
 };
