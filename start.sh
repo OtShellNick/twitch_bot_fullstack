@@ -8,6 +8,8 @@ docker volume rm $(docker volume ls -q)
 
 docker-compose up -d
 
+sleep 20
+
 docker compose exec -i mongo1 sh -c 'mongorestore --archive' < ./backups/db.archive
 
 sleep 5
