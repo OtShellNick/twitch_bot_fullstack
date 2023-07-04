@@ -10,6 +10,6 @@ docker-compose up -d
 
 sleep 20
 
-docker compose exec -i mongo1 sh -c 'mongorestore --archive' < ./backups/db.archive
+docker compose exec -T mongo1 sh -c 'mongorestore --archive' < ./backups/db.archive
 
 sleep 5
