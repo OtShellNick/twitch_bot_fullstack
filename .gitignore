@@ -1,5 +1,6 @@
 .env
 */.env
+*/.env.local
 */node_modules/
 */package-lock.json
 .DS_Store
@@ -7,3 +8,5 @@
 .vs
 server/services/test.service.js
 backups
+*/.next
+*/srcc
