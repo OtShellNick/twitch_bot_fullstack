@@ -20,6 +20,7 @@ i18n.use(initReactI18next)
 				translation: ua,
 			},
 		},
+		lng: localStorage.getItem('i18nextLng') || 'ru-RU',
 		fallbackLng: ['en', 'ru', 'ua'],
 		bindI18n: 'languageChanged',
 		bindI18nStore: '',
