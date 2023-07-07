@@ -1,5 +1,5 @@
-console.log(process.env)
-const { NEXT_PUBLIC_SERVER_URI } = process.env;
+
+const { SERVER_URI } = process.env;
 
 type TServerConfig = {
     url: string,
@@ -7,16 +7,18 @@ type TServerConfig = {
     data: Object
 }
 const Server = async ({ url, method = 'GET', data = {} }: TServerConfig) => {
-    const fullUri = NEXT_PUBLIC_SERVER_URI + 'v1/' + url;
+    const fullUri = 'https://lastwitch.ru/' + 'v2/' + url;
 
     const fetchData = JSON.stringify(data);
+
+    console.log('data', data)
 
     const options = {
         method,
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
         },
-        data: fetchData
+        body: fetchData
     };
 
     return await fetch(fullUri, options)

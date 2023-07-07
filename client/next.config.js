@@ -7,17 +7,6 @@ module.exports = {
                 permanent: true,
                 destination: '/dashboard'
             },
-            {
-                source: '/dashboard',
-                missing: [
-                    {
-                        type: 'header',
-                        key: 'Authorization',
-                    },
-                ],
-                permanent: false,
-                destination: '/login',
-            },
         ]
     },
 }

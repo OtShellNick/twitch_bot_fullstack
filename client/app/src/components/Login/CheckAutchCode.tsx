@@ -14,7 +14,7 @@ const CheckAuthCode = () => {
         try {
             const data = await login(code);
 
-            console.log('login data', data);
+            console.log('login data', data.json());
         } catch (err) {
             console.log('login error', err);
         }
