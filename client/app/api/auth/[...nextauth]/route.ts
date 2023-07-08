@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import type { NextAuthOptions } from 'next-auth';
+import { cookies } from 'next/headers'
 import TwitchProvider from "next-auth/providers/twitch";
 import { login } from "@actions/personal";
 
@@ -18,7 +19,14 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async signIn({ user, account, profile, email, credentials }) {
             try {
-                await login(account);
+                const { token } = await login(account);
+
+                cookies().set({
+                    name: 'wbautht',
+                    value: token,
+                    httpOnly: true,
+                    path: '/'
+                });
 
                 return '/dashboard'
             } catch (err) {

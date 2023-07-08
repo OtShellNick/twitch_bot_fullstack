@@ -6,6 +6,8 @@ const {
   becomeChannelModerator
 } = require("../methods/twitch.methods");
 
+const { createJwtToken } = require('../helpers/jwtToken');
+
 module.exports = {
   name: "auth",
   version: 1,
@@ -48,9 +50,13 @@ module.exports = {
             await db.editRow('users', { id: user.id }, user);
           }
 
-          console.log('user', user);
 
-          return { status: 200 };
+          const token = createJwtToken({
+            id: user.id,
+            access_token: authData.access_token
+          }, authData.expires_at - Math.floor(Date.now() / 1000));
+
+          return { token, status: 200 };
         }
         catch (err) {
           console.log(err);

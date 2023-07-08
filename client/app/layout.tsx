@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
 
-import { authOptions } from './api/auth/[...nextauth]/route';
-
 import 'normalize.css';
 import '@styles/main.scss';
 
