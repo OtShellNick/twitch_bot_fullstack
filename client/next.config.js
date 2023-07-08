@@ -4,8 +4,8 @@ module.exports = {
         return [
             {
                 source: '/',
+                destination: '/login',
                 permanent: true,
-                destination: '/dashboard'
             },
         ]
     },

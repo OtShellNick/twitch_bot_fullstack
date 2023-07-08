@@ -7,11 +7,9 @@ type TServerConfig = {
     data: Object
 }
 const Server = async ({ url, method = 'GET', data = {} }: TServerConfig) => {
-    const fullUri = 'https://lastwitch.ru/' + 'v2/' + url;
+    const fullUri = 'http://localhost:8082/' + 'v1/' + url;
 
     const fetchData = JSON.stringify(data);
-
-    console.log('data', data)
 
     const options = {
         method,
@@ -22,6 +20,8 @@ const Server = async ({ url, method = 'GET', data = {} }: TServerConfig) => {
     };
 
     return await fetch(fullUri, options)
+        .then(resp => resp.json())
+        .catch(console.log)
 };
 
 export default Server;

@@ -1,14 +1,12 @@
 require("dotenv").config({ path: "../.env" });
 const ApiGateway = require("moleculer-web");
-const Cookies = require("cookies");
-const { createJwtToken, decodeJwtToken } = require("../helpers/jwtToken");
 const cors = require("cors");
 const db = require("../mongo");
 require('../helpers/watchChanges');
 
 module.exports = {
 	name: "api",
-	version: 2,
+	version: 1,
 	mixins: [ApiGateway],
 	settings: {
 		origin: "*",
@@ -28,30 +26,11 @@ module.exports = {
 					json: true,
 					urlencoded: { extended: true },
 				},
-
-				onBeforeCall: ({ meta }, route, req, res) => {
-					const { authorization } = req.headers;
-					if (authorization) {
-						try {
-							meta.session = decodeJwtToken(authorization);
-						} catch (err) {
-							console.log(err);
-						}
-
-						// выгнать по истечению токена
-					}
-				},
-
-				onAfterCall: ({ meta }, route, req, res, data) => {
-					const { session } = meta;
-
-					if (session) {
-						let token = createJwtToken(session);
-						res.setHeader("Authorization", token);
-						console.log(token);
-					}
-					return data;
-				}
+				whitelist: [
+					"$node.*",
+					"v1.api.*",
+					"v1.auth.*",
+				],
 			},
 		],
 	},
