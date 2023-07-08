@@ -1,6 +1,5 @@
 
 import LoginButton from './LoginButton';
-import CheckAuthCode from './CheckAutchCode';
 
 import './Login.scss';
 
@@ -10,7 +9,6 @@ const Login = () => {
 		'channel:moderate',
 		'channel:manage:polls',
 		'channel:manage:broadcast',
-		'channel:manage:moderators',
 		'channel:manage:predictions',
 		'channel:read:redemptions',
 		'channel:read:subscriptions',
@@ -23,7 +21,6 @@ const Login = () => {
 		'moderator:manage:blocked_terms',
 		'moderator:manage:chat_settings',
 		'user:read:broadcast',
-		'user:read:email',
 		'whispers:read',
 		'whispers:edit',
 	];
@@ -31,7 +28,6 @@ const Login = () => {
 	return (
 		<div className='login'>
 			<div className='login__header'>
-				<CheckAuthCode />
 				<div></div>
 				<LoginButton />
 			</div>

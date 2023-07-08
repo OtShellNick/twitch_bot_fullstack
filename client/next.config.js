@@ -17,7 +17,7 @@ module.exports = {
                 ],
                 destination: '/dashboard',
                 permanent: false
-            }
+            },
         ]
     },
 }
