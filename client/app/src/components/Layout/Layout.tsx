@@ -16,8 +16,11 @@ const checkCookies = () => {
 export const Layout = ({ children }: TLayoutProps): JSX.Element => {
     checkCookies();
 
-    return <>
+    return <div className='wrapper'>
         <Header />
-        {children}
-    </>
+        <div className='wrapper__main'>
+            {/* <Aside /> */}
+            {children}
+        </div>
+    </div>
 };
