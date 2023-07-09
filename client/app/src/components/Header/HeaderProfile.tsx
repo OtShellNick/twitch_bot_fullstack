@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { deleteCookie, getCookies } from 'cookies-next';
 
 const HeaderProfile = () => {
-    const { isLoading, isFetching, data, error, isError } = useGetSelfQuery<>(null);
+    const { isLoading, isFetching, data, error, isError } = useGetSelfQuery(null);
 
     useEffect(() => {
         if (isError && 'status' in error) {
