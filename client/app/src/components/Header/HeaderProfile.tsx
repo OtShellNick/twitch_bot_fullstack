@@ -1,10 +1,11 @@
 'use client';
 
-import { useGetSelfQuery } from "@store/api";
-import { redirect } from "next/navigation";
-import Image from "next/image";
 import { useEffect } from "react";
+import Image from "next/image";
+import { redirect } from "next/navigation";
 import { deleteCookie } from 'cookies-next';
+
+import { useGetSelfQuery } from "@store/api";
 
 const HeaderProfile = () => {
     const { isFetching, data: user, error, isError } = useGetSelfQuery(null);
@@ -19,8 +20,6 @@ const HeaderProfile = () => {
             }
         }
     }, [isError]);
-
-    console.log('@@user', user);
 
     if (!isFetching) return <>
         <Image
