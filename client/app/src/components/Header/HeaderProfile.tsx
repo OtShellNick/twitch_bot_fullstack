@@ -1,13 +1,13 @@
 'use client';
 
 import { useGetSelfQuery } from "@store/api";
-import { } from '@store/api'
 import { redirect } from "next/navigation";
+import Image from "next/image";
 import { useEffect } from "react";
-import { deleteCookie, getCookies } from 'cookies-next';
+import { deleteCookie } from 'cookies-next';
 
 const HeaderProfile = () => {
-    const { isLoading, isFetching, data, error, isError } = useGetSelfQuery(null);
+    const { isFetching, data: user, error, isError } = useGetSelfQuery(null);
 
     useEffect(() => {
         if (isError && 'status' in error) {
@@ -18,9 +18,21 @@ const HeaderProfile = () => {
                 redirect('login');
             }
         }
-    }, [isError])
+    }, [isError]);
 
-    return <div>User</div>
+    console.log('@@user', user);
+
+    if (!isFetching) return <>
+        <Image
+            src={user.profile_image_url}
+            alt='avatar'
+            width={35}
+            height={35}
+            priority
+            className="header__profile-info_avatar"
+        />
+        <span>{user.display_name}</span>
+    </>
 };
 
 export default HeaderProfile;

@@ -3,9 +3,15 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 //TODO: update user type
 type User = {
     id: number;
-    name: string;
+    display_name: string;
     email: number;
+    profile_image_url: string;
 };
+
+type TResponse<T> = {
+    data: T;
+    status: number;
+}
 
 export const Api = createApi({
     reducerPath: "Api",
@@ -16,7 +22,10 @@ export const Api = createApi({
     }),
     endpoints: (builder) => ({
         getSelf: builder.query<User, null>({
-            query: () => `user/self`,
+            query: () => ({
+                url: `user/self`,
+            }),
+            transformResponse: ({ data }: TResponse<User>) => data,
         }),
     }),
 });
