@@ -5,7 +5,8 @@
       "@styles/*": ["styles/*"],
       "@components/*": ["components/*"],
       "@actions/*": ["actions/*"],
-      "@helpers/*": ["helpers/*"]
+      "@helpers/*": ["helpers/*"],
+      "@store/*": ["store/*"]
     },
     "lib": [
       "dom",

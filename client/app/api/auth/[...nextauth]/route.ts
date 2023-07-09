@@ -24,7 +24,6 @@ export const authOptions: NextAuthOptions = {
                 cookies().set({
                     name: 'wbautht',
                     value: token,
-                    httpOnly: true,
                     path: '/'
                 });
 

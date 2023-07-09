@@ -51,7 +51,7 @@ module.exports = {
           }
 
 
-          const token = createJwtToken({
+          const token = await createJwtToken({
             id: user.id,
             access_token: authData.access_token
           }, authData.expires_at - Math.floor(Date.now() / 1000));

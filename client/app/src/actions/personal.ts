@@ -5,7 +5,7 @@ export const login = async (data: TLoginData) => await Server({ url: "auth/login
 
 // export const logout = () => Server.logout();
 
-// export const getSelf = () => Server.get("user");
+// export const getSelf = async () => await Server({ url: 'user/self' });
 
 // export const checkAccess = () => !!localStorage.getItem("authorization");
 
