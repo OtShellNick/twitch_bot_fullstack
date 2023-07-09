@@ -4,20 +4,28 @@ module.exports = {
         return [
             {
                 source: '/',
+                destination: '/login',
                 permanent: true,
-                destination: '/dashboard'
             },
             {
-                source: '/dashboard',
-                missing: [
+                source: '/login',
+                has: [
                     {
-                        type: 'header',
-                        key: 'Authorization',
+                        type: 'cookie',
+                        key: 'wbautht'
                     },
                 ],
-                permanent: false,
-                destination: '/login',
+                destination: '/dashboard',
+                permanent: false
             },
         ]
+    },
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'static-cdn.jtvnw.net',
+            },
+        ],
     },
 }

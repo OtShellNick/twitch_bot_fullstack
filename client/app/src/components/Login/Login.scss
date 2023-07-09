@@ -8,8 +8,16 @@
 	}
 
 	&__by-twitch {
-		color: var(--primary-500) !important;
-		border-color: var(--primary-500) !important;
+		color: var(--primary-500);
+		border-color: var(--primary-500);
+		padding: 5px 10px;
+		border-radius: 5px;
+		cursor: pointer;
+		transition: all .3s linear;
+
+		&:hover {
+			background-color: var(--primary-100);
+		}
 	}
 
 	&__main {

@@ -1,22 +1,22 @@
 'use strict'
+const { Errors: { MoleculerError } } = require('moleculer');
 const db = require("../methods/db.methods");
 
 module.exports = {
   name: "user",
   version: 1,
   actions: {
-    ['user.get']: {
-      rest: "GET /",
-      handler: async (ctx) => {
-        try {
-          let id = ctx?.meta?.session?.id;
-          if (!id) {
-            return { error: "INVALID_TOKEN", status: 403 };
-          }
+    self: {
+      rest: "GET /self",
+      handler: async ({ meta, req, response }) => {
 
-          let user = await db.getRow('users', {id});
-          if(!user){
-            return {error: 'USER_NOT_FOUND', status: 400};
+        try {
+          let { id } = meta.session;
+
+          let user = await db.getRow('users', { id });
+
+          if (!user) {
+            throw new MoleculerError('User not found', 404, 'NOT_FOUND', { error: 'User not found' });
           }
 
           user = {
@@ -31,7 +31,12 @@ module.exports = {
 
         } catch (err) {
           console.log(err);
-          return { error: "INTERNAL_ERROR", status: 500 };
+          throw new MoleculerError(
+            err.message || 'Internal server error',
+            err.code || 500,
+            err.type || 'INTERNAL_SERVER_ERROR',
+            err.data || { error: 'Internal server' }
+          );
         }
       },
     },
@@ -39,12 +44,12 @@ module.exports = {
     ['user.list']: {
       rest: "GET /list",
       handler: async (req) => {
-        return { 
-          data: await db.getAllRows('users'), 
-          status: 200 
+        return {
+          data: await db.getAllRows('users'),
+          status: 200
         };
       },
     },
-    
+
   },
 };

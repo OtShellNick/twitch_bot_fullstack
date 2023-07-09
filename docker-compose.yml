@@ -9,47 +9,30 @@ services:
         env_file:
             - ./.env
         ports:
-            - '8088:80'
+            - '9088:3000'
         depends_on:
             - server
-
     server:
         build:
             context: ./server/
         image: server
-        #restart: always
-        env_file:
-            - ./.env
-        ports:
-            - '8082:4465'
-            - '8083:5000'
-        networks:
-            - rsn
-        depends_on:
-            - mongosetup
-
-    mongo-express:
-        image: mongo-express
         restart: always
-        ports:
-            - '8084:8081'
         env_file:
             - ./.env
-        environment:
-            - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
-            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
-            - ME_CONFIG_MONGODB_URL=${MONGO_CONNECT_URI}
-        depends_on:
-            - mongosetup
+        ports:
+            - '9082:4465'
+            - '9083:5000'
         networks:
             - rsn
+        depends_on:
+            - mongosetup
 
     mongo1:
         hostname: mongo1
         container_name: localmongo1
         image: mongo
         ports:
-            - 8090:27017
+            - 9090:27017
         restart: always
         networks:
             - rsn
@@ -64,23 +47,6 @@ services:
         networks:
             - rsn
         entrypoint: ['bash', '/scripts/mongo_setup.sh']
-    # db-backup:
-    #     container_name: db-backup
-    #     image: tiredofit/mongodb-backup
-    #     links:
-    #         - mongo1
-    #     volumes:
-    #         - ./backups:/backups
-    #     environment:
-    #         - DB_HOST=mongo1
-    #         - DB_DUMP_FREQ=1440
-    #         - DB_DUMP_BEGIN=0000
-    #         - DB_CLEANUP_TIME=8640
-    #         - MD5=TRUE
-    #         - COMPRESSION=XZ
-    #     restart: always
-    #     networks:
-    #         - rsn
 
 networks:
     rsn:

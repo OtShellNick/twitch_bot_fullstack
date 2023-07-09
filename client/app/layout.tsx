@@ -1,11 +1,16 @@
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
 
+import { Providers } from '@store/Providers';
+
 import 'normalize.css';
 import '@styles/main.scss';
 
 export const metadata: Metadata = {
     title: 'Twitch Chat Bot',
+    icons: {
+        icon: '/icons/favicon.png',
+    }
 };
 
 const fonts = localFont({
@@ -51,11 +56,15 @@ const fonts = localFont({
             style: 'normal',
         },
     ],
-})
+});
 
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = async ({ children }: { children: React.ReactNode }) => {
     return <html lang="en" className={fonts.className}>
-        <body>{children}</body>
+        <body>
+            <Providers>
+                {children}
+            </Providers>
+        </body>
     </html>
 };
 

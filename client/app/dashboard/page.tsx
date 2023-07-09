@@ -1,3 +1,11 @@
 import Dashboard from "@components/Dashboard/Dashboard";
+import { Layout } from "@components/Layout";
 
-export default Dashboard;
+const RootDashBoard = () => {
+
+    return <Layout>
+        <Dashboard />
+    </Layout>
+};
+
+export default RootDashBoard;
