@@ -28,4 +28,19 @@ module.exports = {
             },
         ],
     },
+    webpack: (config) => {
+
+        config.module.rules.push({
+            test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+            oneOf: [
+                {
+                    resourceQuery: /[tj]sx/,
+                    use: ['@svgr/webpack'],
+                },
+            ],
+            issuer: /\.[tj]sx?$/,
+        },);
+
+        return config;
+    }
 }
