@@ -31,6 +31,7 @@ const HeaderProfile = () => {
                     name={user.display_name}
                     color="secondary"
                     pointer
+                    size="sm"
                     style={{ marginRight: 0 }}
                 />
             </Dropdown.Trigger>
