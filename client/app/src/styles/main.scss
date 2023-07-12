@@ -39,6 +39,15 @@ hr {
 	margin-bottom: 20px;
 }
 
+a {
+	color: inherit;
+	text-decoration: none;
+
+	&:active {
+		color: inherit;
+	}
+}
+
 #root {
 	height: 100vh;
 }

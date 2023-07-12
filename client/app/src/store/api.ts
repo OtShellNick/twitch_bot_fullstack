@@ -17,7 +17,7 @@ export const Api = createApi({
     reducerPath: "Api",
     refetchOnFocus: true,
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8082/v1/",
+        baseUrl: process.env.NEXT_PUBLIC_SERVER_URI + 'v1/',
         credentials: 'include',
     }),
     endpoints: (builder) => ({

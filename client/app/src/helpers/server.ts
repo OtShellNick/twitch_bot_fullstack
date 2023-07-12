@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers';
-const { SERVER_URI } = process.env;
 
 type TServerConfig = {
     url: string,
@@ -7,7 +6,7 @@ type TServerConfig = {
     data?: Object
 }
 const Server = async ({ url, method = 'GET', data = {} }: TServerConfig) => {
-    const fullUri = 'http://localhost:8082/' + 'v1/' + url;
+    const fullUri = process.env.NEXT_PUBLIC_SERVER_URI + 'v1/' + url;
 
     const fetchData = JSON.stringify(data);
 

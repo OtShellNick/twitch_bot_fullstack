@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import localFont from 'next/font/local';
 
-import { Providers } from '@store/Providers';
+import Providers from '@store/Providers';
 
 import 'normalize.css';
 import '@styles/main.scss';
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     title: 'Twitch Chat Bot',
     icons: {
         icon: '/icons/favicon.png',
-    }
+    },
 };
 
 const fonts = localFont({

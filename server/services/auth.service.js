@@ -39,6 +39,7 @@ module.exports = {
 
           if (!currentUser) {
             await db.addRow('users', user);
+            //Делаем юзера модератором
             await becomeChannelModerator(user.id, authData.access_token)
               .catch((err) => {
                 console.log("become moderator error");

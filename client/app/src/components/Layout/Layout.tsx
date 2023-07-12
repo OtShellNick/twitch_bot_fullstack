@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import { TLayoutProps } from './Layout.types';
 
 import { Header } from '@components/Header';
+import { Aside } from '@components/Aside';
 
 const checkCookies = () => {
     const wbautht = cookies().get('wbautht');
@@ -19,7 +20,7 @@ export const Layout = ({ children }: TLayoutProps): JSX.Element => {
     return <div className='wrapper'>
         <Header />
         <div className='wrapper__main'>
-            {/* <Aside /> */}
+            <Aside />
             {children}
         </div>
     </div>
