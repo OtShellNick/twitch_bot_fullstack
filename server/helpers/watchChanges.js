@@ -72,11 +72,20 @@ function userWatcher() {
 
   userStream.on('change', async (next) => {
     console.log('received a change to the collection: \t', next);
+    const {
+      operationType,
+      fullDocument: {
+        id,
+        login,
+        refresh_token,
+        bot_status
+      }
+    } = next;
 
-    if (next.operationType == 'update') {
-      let { id, login, refresh_token, bot_status } = next.fullDocument;
-      let { 
-        bot_status: newBotStatus, 
+    if (operationType === 'update') {
+
+      let {
+        bot_status: newBotStatus,
         refresh_token: newRefreshToken,
       } = next.updateDescription?.updatedFields;
 
@@ -90,12 +99,13 @@ function userWatcher() {
           });
       }
 
-      if (newRefreshToken && bot_status == 1 && !socketCollection[id]) {
-        await runUserBot(id, login, refresh_token)
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+      if (newRefreshToken && bot_status == 1 && !socketCollection[id]) await connectUserBot({ id, login, refresh_token });
+
+    } else if (operationType === 'insert') {
+
+      if (bot_status === 1 && !socketCollection[id]) await connectUserBot({ id, login, refresh_token });
+
+      console.log('socket', socketCollection)
     }
   });
 
@@ -114,11 +124,11 @@ function spamWatcher() {
     if (next.operationType == 'update' || next.operationType == 'insert') {
       let { id, caps_ban, max_emotes } = next.fullDocument;
 
-      if(caps_ban !== undefined && socketCollection[id]){
+      if (caps_ban !== undefined && socketCollection[id]) {
         socketCollection[id].setCapsMode(caps_ban);
       }
 
-      if(max_emotes !== undefined && socketCollection[id]){
+      if (max_emotes !== undefined && socketCollection[id]) {
         socketCollection[id].setMaxEmotes(max_emotes);
       }
     }
@@ -134,3 +144,15 @@ db.emitter.on('connect', () => {
   userWatcher();
   spamWatcher();
 });
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+const connectUserBot = async ({ id, login, refresh_token }) => {
+
+  try {
+    await runUserBot(id, login, refresh_token)
+  } catch (err) {
+    console.log("Error in connectUserBot", err);
+  }
+
+}

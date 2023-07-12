@@ -2,10 +2,12 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 //TODO: update user type
 type User = {
-    id: number;
-    display_name: string;
-    email: number;
-    profile_image_url: string;
+    id?: number;
+    login?: string;
+    display_name?: string;
+    email?: number;
+    profile_image_url?: string;
+    bot_status?: number;
 };
 
 type TResponse<T> = {
@@ -27,7 +29,14 @@ export const Api = createApi({
             }),
             transformResponse: ({ data }: TResponse<User>) => data,
         }),
+        userUpdate: builder.mutation<User, User>({
+            query: (userData) => ({
+                method: 'POST',
+                url: 'user/update',
+                body: userData
+            })
+        })
     }),
 });
 
-export const { useGetSelfQuery } = Api;
+export const { useGetSelfQuery, useUserUpdateMutation } = Api;

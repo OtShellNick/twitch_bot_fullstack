@@ -9,7 +9,7 @@ services:
         env_file:
             - ./.env
         ports:
-            - '9088:3000'
+            - '8088:3000'
         depends_on:
             - server
     server:
@@ -20,8 +20,8 @@ services:
         env_file:
             - ./.env
         ports:
-            - '9082:4465'
-            - '9083:5000'
+            - '8082:4465'
+            - '8083:5000'
         networks:
             - rsn
         depends_on:
@@ -32,7 +32,7 @@ services:
         container_name: localmongo1
         image: mongo
         ports:
-            - 9090:27017
+            - 8090:27017
         restart: always
         networks:
             - rsn
