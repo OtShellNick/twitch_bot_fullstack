@@ -11,6 +11,7 @@ import { useGetSelfQuery } from "@store/api";
 
 const HeaderProfile = () => {
     const { isFetching, data: user, error, isError } = useGetSelfQuery(null);
+    const url = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
     useEffect(() => {
         if (isError && 'status' in error) {
@@ -22,7 +23,7 @@ const HeaderProfile = () => {
         }
     }, [isError]);
 
-    if (!isFetching && !isError) return <>
+    if (!isFetching && !isError && user) return <>
         <Dropdown placement="bottom-left" disableAnimation>
             <Dropdown.Trigger>
                 <User
@@ -36,7 +37,7 @@ const HeaderProfile = () => {
             <Dropdown.Menu color="secondary">
                 <Dropdown.Item icon={<Image className="header__profile-info_icon" src='/icons/logout.svg' alt="logout" width={18} height={18} color='inherit' />} key="logout" color="error" withDivider css={{ height: "$14" }}>
                     <Text color="inherit" css={{ d: "flex" }} onClick={() => {
-                        signOut({ callbackUrl: 'http://localhost:8088/login' });
+                        signOut({ callbackUrl: `${url}login` });
                         deleteCookie('wbautht');
                     }}>
                         Logout

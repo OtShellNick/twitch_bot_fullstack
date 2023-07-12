@@ -6,7 +6,6 @@ import cn from 'classnames';
 
 import IconDashboard from '/public/icons/dashboard.svg?tsx';
 import IconTimers from '/public/icons/timers.svg?tsx';
-import IconSpam from '/public/icons/spam.svg?tsx';
 
 export const Menu = () => {
     const headersList = headers();
@@ -22,11 +21,6 @@ export const Menu = () => {
             name: 'timers',
             title: 'TIMERS',
             icon: <IconTimers className='menu__item_icon icon_sm' />
-        },
-        {
-            name: 'spam',
-            title: 'SPAM',
-            icon: <IconSpam className='menu__item_icon icon_sm' />
         },
     ];
 

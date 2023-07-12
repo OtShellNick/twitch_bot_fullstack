@@ -62,7 +62,7 @@ module.exports = {
 
 			try {
 				const data = await checkJwtToken(wbautht);
-				console.log('data', data);
+				console.log('jwt', data);
 
 				ctx.meta.session = data;
 
