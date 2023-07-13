@@ -6,7 +6,7 @@ type TServerConfig = {
     data?: Object
 }
 const Server = async ({ url, method = 'GET', data = {} }: TServerConfig) => {
-    const fullUri = process.env.NEXT_PUBLIC_SERVER_URI + 'v1/' + url;
+    const fullUri = process.env.SERVER_URI + 'v1/' + url;
 
     const fetchData = JSON.stringify(data);
 

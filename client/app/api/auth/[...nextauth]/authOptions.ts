@@ -3,6 +3,15 @@ import { cookies } from 'next/headers'
 import TwitchProvider from "next-auth/providers/twitch";
 import { login } from "@actions/personal";
 
+const SCOPES = [
+    'openid',
+    'user:read:email',
+    'channel:manage:moderators',
+    'chat:read',
+    'chat:edit',
+    'channel:moderate'
+]
+
 export const authOptions: NextAuthOptions = {
     providers: [
         TwitchProvider({
@@ -10,7 +19,7 @@ export const authOptions: NextAuthOptions = {
             clientSecret: process.env.SECRET_KEY,
             authorization: {
                 params: {
-                    scope: 'openid user:read:email channel:manage:moderators'
+                    scope: SCOPES.join(' ')
                 }
             }
         })

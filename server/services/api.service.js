@@ -35,6 +35,18 @@ module.exports = {
 				whitelist: [
 					"$node.*",
 					"v1.api.*",
+				],
+			},
+			{
+				name: 'auth',
+				path: "/",
+				autoAliases: true,
+
+				bodyParser: {
+					json: true,
+					urlencoded: { extended: true },
+				},
+				whitelist: [
 					"v1.auth.*",
 				],
 			},
@@ -49,19 +61,6 @@ module.exports = {
 				},
 				whitelist: [
 					"v1.user.*",
-				]
-			},
-			{
-				name: 'bot',
-				path: "/",
-				autoAliases: true,
-				authorization: true,
-				bodyParser: {
-					json: true,
-					urlencoded: { extended: true },
-				},
-				whitelist: [
-					"v1.bot.*",
 				]
 			},
 		],

@@ -9,19 +9,29 @@ import { useUserUpdateMutation, useGetSelfQuery } from '@store/api';
 
 const Dashboard = () => {
     const { data: user, isSuccess } = useGetSelfQuery(null);
-    const [updateUser, data] = useUserUpdateMutation();
+    const [updateUser] = useUserUpdateMutation();
 
 
     if (isSuccess) return <main>
         Main
-        <Switch checked={!!user.bot_status} bordered size="sm" color="secondary" shadow animated onClick={(e) => {
-            const { checked } = e.target as HTMLInputElement;
-            if (checked !== undefined) {
-                console.log('cheked', checked);
-                updateUser({ bot_status: checked ? 1 : 0 });
-            }
-        }} />
+        <Switch
+            checked={!!user.bot_status}
+            bordered
+            size="sm"
+            color="secondary"
+            shadow
+            animated
+            onClick={(e) => {
+                const { checked } = e.target as HTMLInputElement;
+                if (checked !== undefined) {
+                    console.log('cheked', checked);
+                    updateUser({ bot_status: checked ? 1 : 0 });
+                }
+            }}
+        />
     </main>
+
+    return null;
 };
 
 export default Dashboard;

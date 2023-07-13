@@ -4,10 +4,16 @@ const { TwitchSocket, connWatcher } = require('./connection');
 let socketCollection = {};
 
 async function addConnection(id, channel, refresh_token) {
-  if(socketCollection[id]) return;
 
-  socketCollection[id] = new TwitchSocket(id, channel);
-  await socketCollection[id].connect(refresh_token);
+  try {
+    if (socketCollection[id]) return;
+
+    socketCollection[id] = new TwitchSocket(id, channel);
+    await socketCollection[id].connect(refresh_token);
+  } catch (error) {
+    console.log(`error connect to channel ${channel}`, error);
+  }
+
 }
 
 connWatcher.on('close', (id) => {

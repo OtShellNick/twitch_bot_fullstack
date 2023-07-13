@@ -87,26 +87,22 @@ function userWatcher() {
       let {
         bot_status: newBotStatus,
         refresh_token: newRefreshToken,
-      } = next.updateDescription?.updatedFields;
+      } = next.updateDescription.updatedFields;
 
-      if (newBotStatus == 0 && socketCollection[id]) {
-        socketCollection[id].disconnect();
-      }
-      else if (newBotStatus == 1 && !socketCollection[id]) {
-        await runUserBot(id, login, refresh_token)
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+      if (newBotStatus === 0 && socketCollection[id]) socketCollection[id].disconnect();
 
-      if (newRefreshToken && bot_status == 1 && !socketCollection[id]) await connectUserBot({ id, login, refresh_token });
+      if (newBotStatus === 1 && !socketCollection[id]) await connectUserBot({ id, login, refresh_token });
+
+      if (newRefreshToken && bot_status === 1 && socketCollection[id]) await reconnectUserBot({ id, login, refresh_token });
+
+      if (newRefreshToken && bot_status === 1 && !socketCollection[id]) await connectUserBot({ id, login, refresh_token });
 
     } else if (operationType === 'insert') {
 
       if (bot_status === 1 && !socketCollection[id]) await connectUserBot({ id, login, refresh_token });
 
-      console.log('socket', socketCollection)
     }
+
   });
 
   userStream.on('error', async (err) => {
@@ -155,4 +151,14 @@ const connectUserBot = async ({ id, login, refresh_token }) => {
     console.log("Error in connectUserBot", err);
   }
 
+};
+
+const reconnectUserBot = async ({ id, login, refresh_token }) => {
+  socketCollection[id].disconnect();
+
+  try {
+    await runUserBot(id, login, refresh_token)
+  } catch (err) {
+    console.log("Error in connectUserBot", err);
+  }
 }
