@@ -12,11 +12,11 @@ async function runUserBot(id, login, refresh_token) {
     await addConnection(id, login, refresh_token)
       .then(() => {
 
-        if(spam?.max_emotes !== undefined){
+        if (spam?.max_emotes !== undefined) {
           socketCollection[id].setMaxEmotes(spam?.max_emotes);
         }
 
-        if(spam?.caps_ban !== undefined){
+        if (spam?.caps_ban !== undefined) {
           socketCollection[id].setCapsMode(spam?.caps_ban);
         }
 

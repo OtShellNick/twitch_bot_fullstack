@@ -2,6 +2,7 @@
 
 const WebSocketClient = require('websocket').w3cwebsocket;
 const { getAccessToken } = require("../methods/twitch.methods");
+const { getRow } = require('../methods/db.methods');
 const { BOT_ACCOUNT, REFRESH_TOKEN } = process.env;
 
 let master;
@@ -15,16 +16,22 @@ function connect() {
   master.onmessage = messageHandler;
 }
 
-connect();
+setTimeout(() => connect(), 10000);
 
 async function login() {
   let refreshData;
   try {
-    refreshData = await getAccessToken(REFRESH_TOKEN);
+    const { refresh_token, login } = await getRow('users', { id: '929422572' });
+
+    console.log('login', login, refresh_token);
+
+    refreshData = await getAccessToken(refresh_token);
+
+    console.log('refersh data', refreshData);
 
     master.send(`PASS oauth:${refreshData.access_token}`);
-    master.send(`NICK ${BOT_ACCOUNT}`);
-    master.send(`JOIN #${BOT_ACCOUNT}`);
+    master.send(`NICK ${login}`);
+    master.send(`JOIN #${login}`);
   }
   catch (err) {
     console.log('error master connect', err);

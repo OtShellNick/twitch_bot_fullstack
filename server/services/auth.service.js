@@ -33,11 +33,12 @@ module.exports = {
           let { data: [user] } = await getUserInfoByAuthCode(authData);
 
           user.refresh_token = authData.refresh_token;
-          user.bot_status = 0;
 
           let currentUser = await db.getRow('users', { id: user.id });
 
           if (!currentUser) {
+            user.bot_status = 0;
+
             await db.addRow('users', user);
             //Делаем юзера модератором
             await becomeChannelModerator(user.id, authData.access_token)
