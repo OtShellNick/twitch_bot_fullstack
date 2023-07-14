@@ -1,9 +1,10 @@
 import { Layout } from "@components/Layout";
+import { Timers } from "@components/Timers";
 
 const RootTimers = () => {
 
     return <Layout>
-        <div>Timers</div>
+        <Timers />
     </Layout>
 };
 

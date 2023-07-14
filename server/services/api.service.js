@@ -63,6 +63,19 @@ module.exports = {
 					"v1.user.*",
 				]
 			},
+			{
+				name: 'timers',
+				path: "/",
+				autoAliases: true,
+				authorization: true,
+				bodyParser: {
+					json: true,
+					urlencoded: { extended: true },
+				},
+				whitelist: [
+					"v1.timers.*",
+				],
+			},
 		],
 	},
 
