@@ -4,9 +4,6 @@
 		grid-template-columns: 4fr 1fr;
 		margin-bottom: 25px;
 
-		&_heading {
-		}
-
 		&_right {
 			display: flex;
 			align-items: center;
@@ -48,8 +45,7 @@
 		height: 65vh;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
-		padding: 25px;
+		gap: 30px;
 	}
 
 	&__table {
