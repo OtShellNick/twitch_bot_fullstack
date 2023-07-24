@@ -1,10 +1,6 @@
-import { Layout } from "@components/Layout";
-
 const RootTimers = () => {
 
-    return <Layout>
-        <div>Timers</div>
-    </Layout>
+    return <div>Timers</div>
 };
 
 export default RootTimers;

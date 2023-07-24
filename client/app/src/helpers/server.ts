@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 type TServerConfig = {
     url: string,
@@ -22,6 +23,12 @@ const Server = async ({ url, method = 'GET', data = {} }: TServerConfig) => {
     return await fetch(fullUri, options)
         .then(resp => {
             const data = resp.json();
+
+            if ('code' in data && data.code === 401) {
+                cookies().delete('wbautht');
+                redirect('/login');
+            }
+
             return data;
         })
         .catch(err => {

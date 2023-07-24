@@ -5,6 +5,8 @@ import { redirect } from 'next/navigation';
 
 import { TLayoutProps } from './Layout.types';
 
+import { getSelf } from '@actions/personal';
+
 import { Header } from '@components/Header';
 import { Aside } from '@components/Aside';
 
@@ -14,8 +16,11 @@ const checkCookies = () => {
     if (!wbautht) redirect('/login');
 }
 
-export const Layout = ({ children }: TLayoutProps): JSX.Element => {
+export const Layout = async ({ children }: TLayoutProps) => {
     checkCookies();
+    const user = await getSelf();
+
+    console.log('user', user)
 
     return <div className='wrapper'>
         <Header />
