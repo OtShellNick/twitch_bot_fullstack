@@ -2,7 +2,6 @@
 
 .btn {
   display: inline-block;
-  padding: 0.5em 1em;
   border: none;
   border-radius: 4px;
   font-weight: bold;
@@ -51,4 +50,16 @@
 .btn-disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.btn-sm {
+  padding: 0.25em 0.5em;
+}
+
+.btn-md {
+  padding: 0.5em 1em;
+}
+
+.btn-lg {
+  padding: 1em 2em;
 }
