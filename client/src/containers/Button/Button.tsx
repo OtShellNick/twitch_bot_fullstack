@@ -1,31 +1,17 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import React, { DetailedHTMLProps, ButtonHTMLAttributes } from 'react';
 import cl from 'classnames';
-
 import './Button.scss';
-
-enum ColorsENUM {
-  primary = 'primary',
-  secondary = 'secondary',
-  success = 'success',
-  error = 'error',
-  disabled = 'disabled',
-}
-
-enum SizesENUM {
-  sm = 'sm',
-  md = 'md',
-  lg = 'lg',
-}
 
 interface ButtonProps {
   children: React.ReactNode;
-  color?: ColorsENUM;
+  color?: 'primary' | 'secondary' | 'success' | 'error' | 'disabled';
   disabled?: boolean;
   onClick?: () => void;
-  size?: SizesENUM;
+  size?: 'sm' | 'md' | 'lg';
   iconBefore?: React.ReactNode;
   iconAfter?: React.ReactNode;
   type?: DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>['type'];
+  className?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -37,15 +23,19 @@ export const Button: React.FC<ButtonProps> = ({
   iconAfter,
   iconBefore,
   type,
+  className,
 }) => {
   return (
     <button
-      className={cl({
-        btn: true,
-        [`btn-${color}`]: true,
-        [`btn-disabled`]: disabled,
-        [`btn-${size}`]: true,
-      })}
+      className={cl(
+        {
+          btn: true,
+          [`btn-${color}`]: true,
+          'btn-disabled': disabled,
+          [`btn-${size}`]: true,
+        },
+        className,
+      )}
       onClick={onClick}
       disabled={disabled}
       type={type || 'button'}>
