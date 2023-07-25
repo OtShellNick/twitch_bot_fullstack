@@ -1,5 +1,5 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, Root } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import '@containers/Intl/Intl';
@@ -13,13 +13,13 @@ import '@style/main.scss';
 /**
  * Компонент, отображающий корневой элемент приложения.
  */
-const RootComponent = () => {
+const RootComponent: React.FC = () => {
   // Получаем корневой элемент из DOM
-  const rootElement = document.getElementById('root');
+  const rootElement: HTMLElement | null = document.getElementById('root');
 
   // Если корневой элемент существует, создаем корневой узел React
   if (rootElement) {
-    const root = createRoot(rootElement);
+    const root: Root = createRoot(rootElement);
 
     // Рендерим приложение в корневом узле
     root.render(
@@ -34,5 +34,7 @@ const RootComponent = () => {
   // Возвращаем null, если корневой элемент не найден
   return null;
 };
+
+RootComponent({});
 
 export default RootComponent;
