@@ -1,7 +1,7 @@
 import React, { useEffect, useState, lazy } from 'react';
 import { Route, Routes, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Layout from '@components/Layout/Layout';
-import Login from '@components/Login/Login';
+import { Login } from '@components/Login';
 import Preloader from '@containers/Preloader/Preloader';
 import { login, checkAccess } from '@actions/personal';
 

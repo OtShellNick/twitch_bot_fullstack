@@ -1,5 +1,6 @@
 @import '@style/colors';
 
+// Стили для кнопок
 .btn {
   display: flex;
   gap: 0.5em;
@@ -11,57 +12,69 @@
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
 
-.btn-primary {
-  color: var(--primary-50);
-  background-color: var(--primary-500);
-}
+  // Стили для основной кнопки
+  &-primary {
+    color: var(--primary-50);
+    background-color: var(--primary-500);
 
-.btn-primary:hover {
-  background-color: var(--primary-600);
-}
+    // Стили при наведении на основную кнопку
+    &:hover {
+      background-color: var(--primary-600);
+    }
+  }
 
-.btn-secondary {
-  color: var(--blue-50);
-  background-color: var(--blue-500);
-}
+  // Стили для второстепенной кнопки
+  &-secondary {
+    color: var(--blue-50);
+    background-color: var(--blue-500);
 
-.btn-secondary:hover {
-  background-color: var(--blue-700);
-}
+    // Стили при наведении на второстепенную кнопку
+    &:hover {
+      background-color: var(--blue-700);
+    }
+  }
 
-.btn-success {
-  color: var(--green-50);
-  background-color: var(--green-500);
-}
+  // Стили для кнопки успеха
+  &-success {
+    color: var(--green-50);
+    background-color: var(--green-500);
 
-.btn-success:hover {
-  background-color: var(--green-700);
-}
+    // Стили при наведении на кнопку успеха
+    &:hover {
+      background-color: var(--green-700);
+    }
+  }
 
-.btn-error {
-  color: var(--red-50);
-  background-color: var(--red-500);
-}
+  // Стили для кнопки ошибки
+  &-error {
+    color: var(--red-50);
+    background-color: var(--red-500);
 
-.btn-error:hover {
-  background-color: var(--red-700);
-}
+    // Стили при наведении на кнопку ошибки
+    &:hover {
+      background-color: var(--red-700);
+    }
+  }
 
-.btn-disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+  // Стили для отключенной кнопки
+  &-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
-.btn-sm {
-  padding: 0.25em 0.5em;
-}
+  // Стили для кнопки малого размера
+  &-sm {
+    padding: 0.25em 0.5em;
+  }
 
-.btn-md {
-  padding: 0.5em 1em;
-}
+  // Стили для кнопки среднего размера
+  &-md {
+    padding: 0.5em 1em;
+  }
 
-.btn-lg {
-  padding: 1em 2em;
+  // Стили для кнопки большого размера
+  &-lg {
+    padding: 1em 2em;
+  }
 }

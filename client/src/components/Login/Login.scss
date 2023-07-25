@@ -1,18 +1,21 @@
 .login {
-	&__header {
-		display: flex;
-		justify-content: space-between;
-		padding: 10px 15px;
-		background-color: var(--gray-50);
-		border-bottom: 1px solid var(--gray-100);
-	}
+  // Стили для заголовка
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: var(--gray-50);
+    border-bottom: 1px solid var(--gray-100);
+  }
 
-	&__by-twitch {
-		color: var(--primary-500) !important;
-		border-color: var(--primary-500) !important;
-	}
+  // Стили для кнопки "By Twitch"
+  &__by-twitch {
+    color: var(--primary-500);
+    border-color: var(--primary-500);
+  }
 
-	&__main {
-		padding: 10px 15px;
-	}
+  // Стили для основного содержимого
+  &__main {
+    padding: 10px 15px;
+  }
 }
