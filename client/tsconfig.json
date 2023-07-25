@@ -1,15 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": "./src",
     "paths": {
-      "@api/*": ["./api/*"],
-      "@uikit/*": ["./@setproduct-ui/core/*"],
+      "@/*": ["./*"],
+      "@components/*": ["./components/*"],
       "@const/*": ["./const/*"],
       "@data/*": ["./data/*"],
       "@helpers/*": ["./helpers/*"],
@@ -22,8 +18,7 @@
       "@store/*": ["./store/*"],
       "@atoms/*": ["./ui/atoms/*"],
       "@blocks/*": ["./ui/blocks/*"],
-      "@components/*": ["./ui/components/*"],
-      "@templates/*": ["./ui/templates/*"],
+      "@templates/*": ["./ui/templates/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -39,7 +34,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }
