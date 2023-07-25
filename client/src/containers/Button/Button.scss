@@ -1,0 +1,54 @@
+@import '@style/colors';
+
+.btn {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  color: var(--primary-50);
+  background-color: var(--primary-500);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-600);
+}
+
+.btn-secondary {
+  color: var(--blue-50);
+  background-color: var(--blue-500);
+}
+
+.btn-secondary:hover {
+  background-color: var(--blue-700);
+}
+
+.btn-success {
+  color: var(--green-50);
+  background-color: var(--green-500);
+}
+
+.btn-success:hover {
+  background-color: var(--green-700);
+}
+
+.btn-error {
+  color: var(--red-50);
+  background-color: var(--red-500);
+}
+
+.btn-error:hover {
+  background-color: var(--red-700);
+}
+
+.btn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

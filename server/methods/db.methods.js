@@ -12,7 +12,7 @@ module.exports = {
     return await collection.insertOne(row);
   },
 
-  async getAllRows(colName, filter={}) {
+  async getAllRows(colName, filter = {}) {
     const collection = db.get().collection(colName);
     return await collection.find(filter).toArray();
   },
@@ -24,14 +24,14 @@ module.exports = {
     const options = { upsert: false };
     const updateDoc = {
       $set: {
-        deleted: new Date()
+        deleted: new Date(),
       },
     };
-    
+
     return await collection.updateOne(filter, updateDoc, options);
   },
 
-  async editRow(colName, filter, toUpdate, upsert=false) {
+  async editRow(colName, filter, toUpdate, upsert = false) {
     const collection = db.get().collection(colName);
 
     // this option instructs the method to create a document if no documents match the filter
@@ -46,12 +46,12 @@ module.exports = {
     const updateDoc = {
       $set: toUpdate,
     };
-    
+
     return await collection.updateOne(filter, updateDoc, options);
   },
 
-  async incRow(colName, filter, toInc){
+  async incRow(colName, filter, toInc) {
     const collection = db.get().collection(colName);
     return await collection.updateOne(filter, { $inc: toInc }, { upsert: true });
-  }
-}
+  },
+};

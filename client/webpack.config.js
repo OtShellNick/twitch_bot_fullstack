@@ -80,7 +80,7 @@ const plugins = () => [
 
 module.exports = {
 	resolve: {
-		extensions: ['.js', '.json', '.jsx', '.scss'],
+		extensions: ['.js', '.ts', '.json', '.jsx', '.tsx', '.scss'],
 		alias: {
 			'@': path.resolve(__dirname, './src'),
 			'@components': path.resolve(__dirname, './src/components'),
@@ -158,6 +158,10 @@ module.exports = {
 				test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
 				oneOf: [
 					{
+						resourceQuery: /tsx/,
+						use: ['@svgr/webpack'],
+					},
+					{
 						resourceQuery: /jsx/,
 						use: ['@svgr/webpack'],
 					},
@@ -180,6 +184,16 @@ module.exports = {
 				use: jsLoaders(),
 			},
 			{
+				test: /\.ts$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'babel-loader',
+						options: babelOptions('@babel/preset-typescript'),
+					},
+				],
+			},
+			{
 				test: /\.jsx$/,
 				include: [/sbx-.+/, /src/],
 				use: [
@@ -189,6 +203,20 @@ module.exports = {
 					},
 				],
 			},
+			{
+				test: /\.tsx$/,
+				include: [/sbx-.+/, /src/],
+				use: [
+					{
+						loader: 'babel-loader',
+						options: babelOptions('@babel/preset-react'),
+					},
+					{
+						loader: 'babel-loader',
+						options: babelOptions('@babel/preset-typescript'),
+					},
+				],
+			}
 		],
 	},
 	devServer: {

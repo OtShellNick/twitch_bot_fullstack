@@ -12,6 +12,7 @@ body {
 	@include size-page('phone-hd-max') {
 		font-size: 10px;
 		//TODO: Fix buttons for mobile devices
+		//TODO: Remove this
 		& .MuiButton-root {
 			font-size: 10px;
 			padding: 2px 3px;
