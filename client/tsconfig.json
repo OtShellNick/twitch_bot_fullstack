@@ -6,8 +6,8 @@
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["./components/*"],
-      "@const/*": ["./const/*"],
-      "@data/*": ["./data/*"],
+      "@containers/*": ["./containers/*"],
+      "@actions/*": ["./actions/*"],
       "@helpers/*": ["./helpers/*"],
       "@hooks/*": ["./hooks/*"],
       "@img/*": ["./img/*"],
