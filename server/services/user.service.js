@@ -1,12 +1,25 @@
-'use strict'
+'use strict';
+
 const db = require("../methods/db.methods");
+
+/**
+ * Модуль для работы с пользователями.
+ * @module user
+ */
 
 module.exports = {
   name: "user",
   version: 1,
   actions: {
-    ['user.get']: {
-      rest: "GET /",
+    /**
+     * Получение информации о текущем пользователе.
+     * @action self
+     * @rest GET /self
+     * @param {Object} ctx - Контекст запроса.
+     * @returns {Object} - Объект с данными пользователя и статусом ответа.
+     */
+    self: {
+      rest: "GET /self",
       handler: async (ctx) => {
         try {
           let id = ctx?.meta?.session?.id;
@@ -36,7 +49,13 @@ module.exports = {
       },
     },
 
-    ['user.list']: {
+    /**
+     * Получение списка всех пользователей.
+     * @action list
+     * @rest GET /list
+     * @returns {Object} - Объект с данными всех пользователей и статусом ответа.
+     */
+    list: {
       rest: "GET /list",
       handler: async (req) => {
         return { 
@@ -45,6 +64,6 @@ module.exports = {
         };
       },
     },
-    
+
   },
 };

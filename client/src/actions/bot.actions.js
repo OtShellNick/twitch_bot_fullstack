@@ -1,4 +1,4 @@
-import Server from '@helpers/server';
+import { Server } from '@helpers/server';
 
 export const switchOnBot = () => Server.post('bot/switch-on');
 
