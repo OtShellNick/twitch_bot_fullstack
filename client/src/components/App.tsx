@@ -2,14 +2,13 @@ import React, { useEffect, useState, lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { login, checkAccess, getSelf } from '@actions/personal';
-import Layout from '@components/Layout/Layout';
+import { Layout } from '@components/Layout';
 import { Login } from '@components/Login';
 import Preloader from '@containers/Preloader/Preloader';
 import { loginUser } from '@store/user.store';
 
 const Dashboard = lazy(() => import('@components/Dashboard/Dashboard'));
 const Timers = lazy(() => import('@components/Timers/Timers'));
-const Spam = lazy(() => import('@components/Spam/Spam'));
 
 /**
  * Главный компонент приложения.
@@ -91,7 +90,6 @@ const App: React.FC = () => {
       <Route element={<Layout />}>
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/timers' element={<Timers />} />
-        <Route path='/spam' element={<Spam />} />
       </Route>
       <Route path='/login' element={<Login />} />
     </Routes>
