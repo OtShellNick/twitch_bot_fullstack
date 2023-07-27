@@ -32,32 +32,33 @@ module.exports = {
       params: {
         code: { type: "string", optional: false },
       },
-      handler: async ({params}) => {
-
+      /**
+       * Обрабатывает заданные параметры и выполняет различные операции.
+       *
+       * @param {object} params - Параметры для функции.
+       * @param {string} params.code - Параметр code.
+       * @return {object} - Результат выполнения функции.
+       * @throws {MoleculerError} - Если произошла ошибка во время выполнения функции.
+       */
+      handler: async ({ params }) => {
         try {
           const { code } = params;
 
           const authData = await getAuthData(code);
-
           const { data: [user] } = await getUserInfoByAuthCode(authData);
 
           user.refresh_token = authData.refresh_token;
 
-          const currentUser = await db.getRow('users', {id: user.id});
+          const currentUser = await db.getRow('users', { id: user.id });
 
           if (!currentUser) {
             user.bot_status = 0;
 
             await db.addRow('users', user);
-            await becomeChannelModerator(user.id, authData.access_token)
-            .catch((err) =>{
-              console.log("become moderator error");
-              console.log(err);
-            });
-
+            await becomeChannelModerator(user.id, authData.access_token);
           } else {
             console.log(`User ${user.id} already exists. Update refresh_token and etc.`);
-            await db.editRow('users', {id: user.id}, user);
+            await db.editRow('users', { id: user.id }, user);
           }
 
           const jwtData = await createJwtToken({
@@ -93,6 +94,16 @@ module.exports = {
       params: {
         token: { type: "string", optional: false },
       },
+      /**
+       * Асинхронно обрабатывает запрос.
+       *
+       * @param {object} params - Объект параметров.
+       * @param {string} params.token - Параметр токена.
+       * @return {object} - Результат функции.
+       * @property {string} data - Новый JWT.
+       * @property {number} status - Код состояния HTTP.
+       * @throws {MoleculerError} - Если возникла ошибка.
+       */
       handler: async ({params}) => {
         const { token } = params;
 
