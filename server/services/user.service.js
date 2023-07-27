@@ -57,6 +57,12 @@ module.exports = {
      */
     list: {
       rest: "GET /list",
+            /**
+       * Retrieves all rows from the "users" table in the database.
+       *
+       * @param {Object} req - the request object
+       * @return {Promise<Object>} an object containing the data and status
+       */
       handler: async (req) => {
         return { 
           data: await db.getAllRows('users'), 

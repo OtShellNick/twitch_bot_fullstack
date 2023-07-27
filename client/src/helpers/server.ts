@@ -64,7 +64,12 @@ class HttpService implements IHttpService {
           error.response?.status &&
           (error.response.status === 403 || error.response.status === 401)
         ) {
-          if (this.retries > 0 && localStorage.getItem('aubottok')) {
+          if (!localStorage.getItem('aubottok') && location.pathname !== '/login') {
+            location.replace('/login');
+            return Promise.reject(error);
+          }
+
+          if (this.retries > 0) {
             this.axiosInstance
               .request({
                 method: 'POST',
