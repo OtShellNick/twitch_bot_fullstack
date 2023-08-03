@@ -1,5 +1,3 @@
-require('dotenv').config({ path: './.env' });
-
 const path = require('path');
 
 const webpack = require('webpack');
@@ -11,7 +9,7 @@ const FontPreloadPlugin = require('webpack-font-preload-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
-const { NODE_ENV, CLIENT_ID, REDIRECT_URI, SERVER_URI, CONFIG } = process.env;
+const { NODE_ENV, CLIENT_ID, REDIRECT_URI, SERVER_URI, SOCKET_URI, CONFIG } = process.env;
 
 console.log('client_id', CLIENT_ID);
 const IsDev = NODE_ENV === 'development';
@@ -66,9 +64,9 @@ const plugins = () => [
   }),
   new webpack.DefinePlugin({
     CLIENT_ID: `'${CLIENT_ID}'`,
-    REDIRECT_URI: `'${config.REDIRECT_URI}'`,
-    SERVER_URI: `'${config.SERVER_URI}'`,
-    SOCKET_URI: `'${config.SOCKET_URI}'`,
+    REDIRECT_URI: `'${REDIRECT_URI}'`,
+    SERVER_URI: `'${SERVER_URI}'`,
+    SOCKET_URI: `'${SOCKET_URI}'`,
   }),
   new HTMLWebpackPlugin({
     template: './src/index.html',

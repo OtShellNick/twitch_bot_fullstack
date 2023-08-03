@@ -60,6 +60,7 @@ class HttpService implements IHttpService {
         return { ...response, data };
       },
       error => {
+        console.log('@@error', error);
         if (
           error.response?.status &&
           (error.response.status === 403 || error.response.status === 401)
