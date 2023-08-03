@@ -107,19 +107,39 @@ module.exports = {
       },
     },
 
-    ['list']: {
+    list: {
       rest: "GET /list",
-      handler: async (ctx) => {
-        let user_id = ctx?.meta?.session?.id;
-        if (!user_id) {
-          return { error: "INVALID_TOKEN", status: 403 };
+      /**
+       * Получение списка всех таймеров для текущего пользователя.
+       * @action list
+       * @rest GET /list
+       * @param {Object} meta - Метаинформация запроса.
+       * @returns {Object} - Объект с данными всех таймеров и статусом ответа.
+       */
+      handler: async ({ meta }) => {
+        try {
+          const { id: user_id } = meta.session;
+    
+          // Получение всех таймеров из базы данных для текущего пользователя
+          const timers = await db.getAllRows('timers', { user_id, deleted: { $exists: false } });
+    
+          return {
+            data: timers,
+            status: 200
+          };
+        } catch (err) {
+          console.log('get timers list error', err);
+    
+          // Генерация MoleculerError в случае ошибки
+          throw new MoleculerError(
+            err.message || 'Internal server error',
+            err.code || 500,
+            err.type || 'INTERNAL_SERVER_ERROR',
+            err.data || { error: 'Internal server' }
+          );
         }
-
-        return {
-          data: await db.getAllRows('timers', { user_id, deleted: { $exists: false } }), 
-          status: 200 
-        };
       },
     }
+    
   },
 };
