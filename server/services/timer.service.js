@@ -22,7 +22,7 @@ module.exports = {
      * @returns {Object} - Объект с данными добавленного таймера и статусом ответа.
      */
     add: {
-      rest: "POST /",
+      rest: "POST /add",
       params: {
         name: { type: 'string', max: 50, optional: false },
         message: { type: 'string', min: 10, max: 500, optional: false },
@@ -83,7 +83,7 @@ module.exports = {
       * @returns {Object} - Объект с статусом ответа.
       */
     delete: {
-      rest: "DELETE /",
+      rest: "DELETE /delete",
       params: {
         timer_id: { type: 'string', optional: false }, // Идентификатор таймера (обязательный параметр)
       },
@@ -141,7 +141,7 @@ module.exports = {
        * @returns {Object} - Объект со статусом ответа.
        */
     edit: {
-      rest: "PUT /",
+      rest: "PUT /edit",
       params: {
         timer_id: { type: 'string', optional: false }, // Идентификатор таймера (обязательный параметр)
         name: { type: 'string', max: 50, optional: true }, // Название таймера (необязательный параметр)
