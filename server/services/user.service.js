@@ -1,5 +1,6 @@
 'use strict';
 
+const { Errors: { MoleculerError } } = require('moleculer');
 const db = require("../methods/db.methods");
 
 /**
@@ -20,19 +21,20 @@ module.exports = {
      */
     self: {
       rest: "GET /self",
-      handler: async (ctx) => {
+      handler: async ({meta}) => {
         try {
-          let id = ctx?.meta?.session?.id;
-          if (!id) {
-            return { error: "INVALID_TOKEN", status: 403 };
+          const { id } = meta.session;
+
+          // Получение информации о пользователе из базы данных
+          const user = await db.getRow('users', { id });
+
+          // Если пользователь не найден, генерируем ошибку
+          if (!user) {
+            throw new MoleculerError('User not found', 404, 'USER_NOT_FOUND', { message: 'User not found' });
           }
 
-          let user = await db.getRow('users', {id});
-          if(!user){
-            return {error: 'USER_NOT_FOUND', status: 400};
-          }
-
-          user = {
+          // Формирование объекта с данными пользователя
+          const userData = {
             id: user.id,
             login: user.login,
             display_name: user.display_name,
@@ -40,11 +42,18 @@ module.exports = {
             bot_status: user.bot_status
           };
 
-          return { data: user, status: 200 };
+          return { data: userData, status: 200 };
 
         } catch (err) {
-          console.log(err);
-          return { error: "INTERNAL_ERROR", status: 500 };
+          console.log('get user self error', err);
+
+          // Генерация MoleculerError в случае ошибки
+          throw new MoleculerError(
+            err.message || 'Internal server error',
+            err.code || 500,
+            err.type || 'INTERNAL_SERVER_ERROR',
+            err.data || { error: 'Internal server' }
+          );
         }
       },
     },
@@ -57,13 +66,12 @@ module.exports = {
      */
     list: {
       rest: "GET /list",
-            /**
-       * Retrieves all rows from the "users" table in the database.
+      /**
+       * Получение всех записей из таблицы "users" в базе данных.
        *
-       * @param {Object} req - the request object
-       * @return {Promise<Object>} an object containing the data and status
+       * @returns {Promise<Object>} - Объект с данными всех пользователей и статусом ответа.
        */
-      handler: async (req) => {
+      handler: async () => {
         return { 
           data: await db.getAllRows('users'), 
           status: 200 
