@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch:dev": "cross-env NODE_ENV=development CONFIG=dev webpack-dev-server --mode development",
-    "watch:prod": "cross-env NODE_ENV=production CONFIG=prod webpack-dev-server --mode development",
-    "prod": "cross-env NODE_ENV=production CONFIG=prod webpack",
-    "dev": "cross-env NODE_ENV=production CONFIG=dev webpack",
+    "watch:dev": "cross-env NODE_ENV=development webpack-dev-server --mode development",
+    "watch:prod": "cross-env NODE_ENV=production webpack-dev-server --mode development",
+    "prod": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=production webpack",
     "lint:es": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint:es:fix": "npm run lint:es -- --fix"
   },
@@ -26,7 +26,6 @@
     "@typescript-eslint/parser": "^6.2.0",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "dotenv": "^16.0.3",
@@ -81,7 +80,6 @@
     "react-redux": "^8.0.4",
     "react-router-dom": "^6.4.2",
     "sbx-client-request": "^0.2.8",
-    "sbx-react-dropdown": "^1.0.2",
     "socket.io-client": "^4.5.4",
     "yup": "^0.32.11"
   },

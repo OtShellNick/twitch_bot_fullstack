@@ -1,8 +1,6 @@
 import React, { memo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { changeLanguage } from 'i18next';
-
-// import Dropdown from 'sbx-react-dropdown';
 import Icon from '@containers/Icons';
 
 import Dropdown from '@/containers/Dropdown';
@@ -46,21 +44,6 @@ const Header = () => {
       ),
       className: 'myOptionClassName',
     },
-    // {
-    //   value: 'ua-UA',
-    //   label: (
-    //     <div
-    //       key='3'
-    //       className='header__dropdown_menu_item'
-    //       onClick={() => {
-    //         localStorage.setItem('i18nextLng', 'ua-UA');
-    //         setLanguage('ua-UA');
-    //         changeLanguage('ua-UA');
-    //       }}>
-    //       <Icon name='ua' className='icon_md' />
-    //     </div>
-    //   ),
-    // },
   ];
 
   return (

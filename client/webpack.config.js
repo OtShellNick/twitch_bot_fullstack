@@ -7,16 +7,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const FontPreloadPlugin = require('webpack-font-preload-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
-const { NODE_ENV, CLIENT_ID, REDIRECT_URI, SERVER_URI, SOCKET_URI, CONFIG } = process.env;
+const { NODE_ENV, CLIENT_ID, REDIRECT_URI, SERVER_URI, SOCKET_URI } = process.env;
 
 console.log('client_id', CLIENT_ID);
 const IsDev = NODE_ENV === 'development';
-
-const config = require(path.join(__dirname, `./config/${CONFIG}.json`));
-
-console.log(config);
 
 const filename = ext => (IsDev ? `[name].${ext}` : `[name].[contenthash].${ext}`);
 
