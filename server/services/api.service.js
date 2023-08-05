@@ -5,7 +5,11 @@ const { Errors: { MoleculerError } } = require('moleculer');
 const cors = require("cors");
 const db = require("../mongo");
 const { checkJwtToken } = require('../helpers/jwtToken');
+const TimersController = require("../helpers/timer");
 const jwt = require('jsonwebtoken');
+const { getRow, getAllRows, getUsersWithActiveTimers } = require("../methods/db.methods");
+const TwitchChatClient = require("../bot/mainBot");
+const { getAccessToken } = require("../methods/twitch.methods");
 require('../helpers/watchChanges');
 
 /**
@@ -143,7 +147,8 @@ module.exports = {
      * @async
      */
     async started() {
-        db.connect('mongodb://mongo1:27017', (err) => {
+        db
+        .connect('mongodb://mongo1:27017', (err) => {
             if (err) {
                 console.log("Unable to connect to Mongo");
                 console.log("error:", err);
@@ -152,5 +157,14 @@ module.exports = {
                 console.log("Connected to Mongo");
             }
         });
+
+        setTimeout( async () => {
+            const user = await getRow('users', { id: process.env.LOGIN });
+            const users = await getAllRows('users', { bot_status: 1 });
+            const timers = await getUsersWithActiveTimers();
+            const authData = await getAccessToken(user.refresh_token);
+            new TwitchChatClient(user.login, authData.access_token, [...users.map(user => `#${user.login}`)]).connect();
+            new TimersController(timers);
+        }, 1000 * 60)
     },
 };

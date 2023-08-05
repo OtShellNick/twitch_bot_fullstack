@@ -138,6 +138,24 @@ class HttpService implements IHttpService {
       ...options,
     });
   }
+
+  put<T>(url: string, data = {}, options = {}): Promise<AxiosResponse<T>> {
+    return this.api<T>({
+      url,
+      data,
+      method: 'PUT',
+      ...options,
+    });
+  }
+
+  delete<T>(url: string, data = {}, options = {}): Promise<AxiosResponse<T>> {
+    return this.api<T>({
+      url,
+      data,
+      method: 'DELETE',
+      ...options,
+    });
+  }
 }
 
 /**

@@ -54,4 +54,18 @@ module.exports = {
     const collection = db.get().collection(colName);
     return await collection.updateOne(filter, { $inc: toInc }, { upsert: true });
   },
+
+  async getUsersWithActiveTimers() {
+    const users = await db.get().collection('users').find({ bot_status: 1 }).toArray();
+    const result = {};
+  
+    for (const user of users) {
+      const timers = await db.get().collection('timers').find({ user_id: user.id, timer_status: 1 }).toArray();
+  
+      result[user.login] = timers;
+    }
+  
+    return result;
+  }
+  
 };

@@ -1,0 +1,30 @@
+.dropdown {
+  position: relative;
+
+  .dropdown-trigger {
+    cursor: pointer;
+
+    &:hover + .dropdown-content {
+      max-height: 500px;
+    }
+  }
+
+  .dropdown-content {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 1;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+
+    &.open {
+      opacity: 1;
+      max-height: 500px;
+    }
+  }
+}
