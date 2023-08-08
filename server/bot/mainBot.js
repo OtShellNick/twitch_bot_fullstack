@@ -36,8 +36,9 @@ class TwitchChatClient {
     if  (eventType === 'PART') this.#partHandler({username, channel});
   }
 
-  #handleClose() {
-    console.log('Disconnected from Twitch chat');
+  #handleClose(e) {
+    console.log('Disconnected from Twitch chat', e);
+    this.reconnect(); // Переподключение при отключении
   }
 
   #registerListeners() {
@@ -69,6 +70,12 @@ class TwitchChatClient {
       this.socket.close();
       this.socket = null;
     }
+  }
+
+  reconnect() {
+    console.log('Reconnecting to Twitch chat...');
+    this.disconnect(); // Закрытие текущего соединения
+    this.connect(); // Установка нового соединения
   }
 
   sendMessage(channel, message) {
