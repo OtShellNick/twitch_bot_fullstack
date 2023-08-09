@@ -28,7 +28,7 @@ class TwitchChatClient {
   #handleMessage({data: message}) {
     const { username, eventType, channel, messageText } = parseTwitchMessage(message);
 
-    console.log('Message from Twitch chat:', messageText);
+    console.log('Message from Twitch chat:', message, '\ntext:', messageText);
 
     if  (eventType === 'PING') this.#pingHandler();
     if  (eventType === 'JOIN') this.#joinHandler({username, channel});
