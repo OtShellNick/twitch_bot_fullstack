@@ -149,7 +149,7 @@ updateTimer(channel, updatedTimer) {
 
     const channelTimers = this.getChannelTimers(channel);
 
-    channelTimers.forEach(timer => {
+    if(channelTimers && channelTimers.length) channelTimers.forEach(timer => {
       if (currentCounter % timer.chat_lines === 0) {
         const message = timer.announce ? '/announce ' + timer.message : timer.message;
 
