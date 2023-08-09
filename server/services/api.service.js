@@ -163,7 +163,7 @@ module.exports = {
             const users = await getAllRows('users', { bot_status: 1 });
             const timers = await getUsersWithActiveTimers();
             const authData = await getAccessToken(user.refresh_token);
-            new TwitchChatClient(user.login, authData.access_token, [...users.map(user => `#${user.login}`), '#thepadlo']).connect();
+            new TwitchChatClient(user.login, authData.access_token, [...users.map(user => `#${user.login}`)]).connect();
             new TimersController(timers);
         }, 1000 * 60)
     },
