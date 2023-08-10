@@ -71,6 +71,17 @@ module.exports = {
           return { data: jwtData, status: 200 };
         } catch (err) {
           console.log('Login Error', err);
+
+          if(!(err instanceof MoleculerError)) {
+            const { status, data } = err;
+            switch (status) {
+              case 400:
+                throw new MoleculerError(data.message, 400, 'BAD_REQUEST', { message: data.message });
+              default:
+                throw new MoleculerError('Internal server error', 500, 'INTERNAL_SERVER_ERROR', { message: 'Internal server error' });   
+            }
+          }
+
           throw new MoleculerError(
             err.message || 'Internal server error',
             err.code || 500,
