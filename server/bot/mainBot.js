@@ -1,6 +1,8 @@
 const WebSocketClient = require('websocket').w3cwebsocket;
 const {parseTwitchMessage} = require('./../helpers/twitchMessageParser');
 const {eventEmitter} = require('./../helpers/emiter');
+const {getRow} = require('./../methods/db.methods');
+const {getAccessToken} = require('./../methods/twitch.methods');
 
 class TwitchChatClient {
   constructor(username, token, channels) {
@@ -9,6 +11,12 @@ class TwitchChatClient {
     this.token = token;
     this.channels = channels;
     this.socket = null;
+  }
+
+  async #updateToken() {
+    const user = await getRow('users', {id: process.env.LOGIN});
+    const authData = await getAccessToken(user.refresh_token);
+    this.token = authData.access_token;
   }
 
   #handleErorr(error) {
@@ -72,9 +80,10 @@ class TwitchChatClient {
     }
   }
 
-  reconnect() {
+  async reconnect() {
     console.log('Reconnecting to Twitch chat...');
     this.disconnect(); // Закрытие текущего соединения
+    await this.#updateToken();
     this.connect(); // Установка нового соединения
   }
 
