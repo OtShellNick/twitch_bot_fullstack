@@ -54,7 +54,7 @@ class TwitchChatClient {
   }
 
   #unregisterListeners() {
-    
+    eventEmitter.removeListener('send_privmsg', ({ channel, message }) => this.sendMessage(channel, message));
   }
 
   connect() {
@@ -78,6 +78,7 @@ class TwitchChatClient {
       this.socket.close();
       this.socket = null;
     }
+    this.#unregisterListeners();
   }
 
   async reconnect() {
